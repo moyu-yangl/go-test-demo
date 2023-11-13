@@ -8,6 +8,7 @@ import (
 	"net/http/httptest"
 	"net/url"
 	"strings"
+	"test/models"
 	"testing"
 )
 
@@ -32,7 +33,7 @@ func TestInitRouter(t *testing.T) {
 }
 
 func TestUser(t *testing.T) {
-	u := &User{Name: "test", Age: 18, Phone: "123456"}
+	u := &models.User{Name: "test", Age: 18, Phone: "123456"}
 	marshal, _ := json.Marshal(u)
 	bodys := string(marshal)
 
