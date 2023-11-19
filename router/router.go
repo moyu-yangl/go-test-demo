@@ -2,9 +2,9 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
+	"go-test-demo/controller"
+	"go-test-demo/db"
 	"log"
-	"test/controller"
-	"test/db"
 )
 
 func InitRouter(r *gin.Engine) *gin.Engine {

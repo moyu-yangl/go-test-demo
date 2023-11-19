@@ -1,6 +1,6 @@
 package db
 
-import "test/models"
+import "go-test-demo/models"
 
 func GetUserByName(name string) []models.User {
 	var res []models.User

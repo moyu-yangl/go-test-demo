@@ -4,11 +4,11 @@ import (
 	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/assert/v2"
+	"go-test-demo/models"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
 	"strings"
-	"test/models"
 	"testing"
 )
 

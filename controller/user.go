@@ -3,9 +3,9 @@ package controller
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"go-test-demo/db"
+	"go-test-demo/models"
 	"net/http"
-	"test/db"
-	"test/models"
 )
 
 func GetUser(c *gin.Context) {
