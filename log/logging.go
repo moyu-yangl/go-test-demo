@@ -11,8 +11,9 @@ var defaultLogger *zap.Logger
 
 func init() {
 	l, _ := New(Options{
-		Level:   "INFO",
-		Outputs: []string{"stdout"},
+		Level:    "INFO",
+		Outputs1: []string{"stdout", "test.log"},
+		Outputs2: []string{"stdout", "error.log"},
 	})
 
 	SetLogger(l)
@@ -20,8 +21,9 @@ func init() {
 
 // Options for logger
 type Options struct {
-	Level   string
-	Outputs []string
+	Level    string
+	Outputs1 []string
+	Outputs2 []string
 }
 
 // New a logger from option
@@ -51,8 +53,8 @@ func New(o Options) (*zap.Logger, error) {
 			EncodeCaller:   zapcore.ShortCallerEncoder,
 			EncodeTime:     zapcore.TimeEncoderOfLayout("2006-01-02 15:04:05.000"),
 		},
-		OutputPaths:      o.Outputs,
-		ErrorOutputPaths: o.Outputs,
+		OutputPaths:      o.Outputs1,
+		ErrorOutputPaths: o.Outputs2,
 	}
 
 	return conf.Build(zap.AddCaller())

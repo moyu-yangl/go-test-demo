@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"go-test-demo/log"
 	"strconv"
 	"sync"
 	"time"
@@ -57,40 +58,8 @@ func main() {
 	//r := gin.Default()
 	//router.InitRouter(r)
 	//r.Run(":8080")
-
-	read := func(k *int) {
-		lock.RLock()
-		fmt.Println("read: ", *k)
-		time.Sleep(time.Millisecond * 500)
-		lock.RUnlock()
-		wg.Done()
-	}
-	write := func(k *int) {
-		lock.Lock()
-		*k = *k + 1
-		fmt.Println("write: ", *k)
-		time.Sleep(time.Millisecond * 1000)
-		lock.Unlock()
-		wg.Done()
-	}
-
-	wg.Add(2)
-	go func() {
-		for i := 0; i < 10; i++ {
-			wg.Add(1)
-			go write(&x)
-		}
-		wg.Done()
-	}()
-	go func() {
-		for i := 0; i < 500; i++ {
-			wg.Add(1)
-			go read(&x)
-		}
-		wg.Done()
-	}()
-	wg.Wait()
-	fmt.Println("end")
+	logger := log.GetLogger()
+	logger.Error("error")
 }
 
 func synck() {
