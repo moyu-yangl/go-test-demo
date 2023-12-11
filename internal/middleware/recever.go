@@ -3,7 +3,7 @@ package middleware
 import (
 	"github.com/gin-gonic/gin"
 	"go-test-demo/constants"
-	"go-test-demo/models"
+	"go-test-demo/internal/models"
 	"log"
 	"net/http"
 	"runtime/debug"

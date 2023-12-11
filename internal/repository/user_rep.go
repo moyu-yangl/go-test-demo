@@ -1,8 +1,8 @@
 package repository
 
 import (
-	"go-test-demo/db"
-	"go-test-demo/models"
+	"go-test-demo/config/db"
+	"go-test-demo/internal/models"
 )
 
 func GetUserByName(name string) []models.User {

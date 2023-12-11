@@ -1,27 +1,23 @@
-package server
+package user
 
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"go-test-demo/constants"
+	"go-test-demo/internal/models"
 	"go-test-demo/internal/repository"
-	"go-test-demo/models"
 	"net/http"
 )
 
 func GetUser(c *gin.Context) {
-	//var user map[string]interface{}
-	//var u User
 	var u struct {
 		Id int `json:"id"`
-		//Name string
-		//Name string `json:"name"`
 	}
 	err := c.BindJSON(&u)
 	if err != nil {
-		c.String(http.StatusOK, "err")
+		c.JSON(http.StatusOK, models.ResultError(constants.SystemErrorCode, constants.SystemErrorMessage))
 		return
 	}
-	//fmt.Println(u.name)
 	res := repository.GetUserById(u.Id)
 	for _, r := range res {
 		fmt.Println(r)

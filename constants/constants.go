@@ -1,6 +1,8 @@
 package constants
 
-import "go-test-demo/models"
+import (
+	models2 "go-test-demo/internal/models"
+)
 
-var NIL_TICKET models.Ticket
-var NIL_USER models.User
+var NilTicket models2.Ticket
+var NilUser models2.User

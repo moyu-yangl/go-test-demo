@@ -2,9 +2,10 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"go-test-demo/db"
+	"go-test-demo/config/db"
 	"go-test-demo/internal/middleware"
-	server2 "go-test-demo/internal/server"
+	"go-test-demo/internal/server/ticket"
+	server2 "go-test-demo/internal/server/user"
 	"log"
 )
 
@@ -14,7 +15,7 @@ func InitRouter(r *gin.Engine) *gin.Engine {
 	apiRouter.Use(middleware.Recover)
 	{
 		ticketRouter := apiRouter.Group("/ticket")
-		ticketRouter.GET("/info/:id", logging(server2.TicketInfo))
+		ticketRouter.GET("/info/:id", logging(ticket.Info))
 
 	}
 	{

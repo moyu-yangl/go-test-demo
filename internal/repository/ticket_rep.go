@@ -2,7 +2,7 @@ package repository
 
 import (
 	"go-test-demo/constants"
-	"go-test-demo/models"
+	"go-test-demo/internal/models"
 	"gorm.io/gorm"
 )
 
@@ -22,7 +22,7 @@ func (rep *ticketRepository) GetTicketById(id uint64) (models.Ticket, error) {
 	if len(records) > 0 {
 		return records[0], nil
 	} else {
-		return constants.NIL_TICKET, tx.Error
+		return constants.NilTicket, tx.Error
 	}
 }
 func (rep *ticketRepository) PageNormalTicketRecord(condition map[string]interface{}, offset int, limit int, orders string) ([]models.Ticket, error) {
