@@ -3,18 +3,24 @@ package router
 import (
 	"github.com/gin-gonic/gin"
 	"go-test-demo/db"
-	"go-test-demo/server"
+	"go-test-demo/internal/middleware"
+	server2 "go-test-demo/internal/server"
 	"log"
 )
 
 func InitRouter(r *gin.Engine) *gin.Engine {
 	db.NewMySQL()
 	apiRouter := r.Group("/v1")
-	apiRouter.GET("/hello", logging(server.Hello))
-	apiRouter.GET("/world", logging(server.World))
-	apiRouter.GET("/test/:isMan", logging(server.PathMan))
-	apiRouter.POST("/from", logging(server.From))
-	apiRouter.POST("/user", logging(server.GetUser))
+	apiRouter.Use(middleware.Recover)
+	{
+		ticketRouter := apiRouter.Group("/ticket")
+		ticketRouter.GET("/info/:id", logging(server2.TicketInfo))
+
+	}
+	{
+		userRouter := apiRouter.Group("/user")
+		userRouter.POST("/user", logging(server2.GetUser))
+	}
 
 	return r
 }

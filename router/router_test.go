@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/assert/v2"
+	"go-test-demo/app"
+	"go-test-demo/db"
 	"go-test-demo/models"
 	"net/http"
 	"net/http/httptest"
@@ -19,6 +21,7 @@ var (
 func init() {
 	g = gin.Default()
 	InitRouter(g)
+	app.InitRepository(db.DB)
 }
 
 func TestInitRouter(t *testing.T) {
@@ -38,6 +41,15 @@ func TestUser(t *testing.T) {
 	bodys := string(marshal)
 
 	req := httptest.NewRequest(http.MethodPost, "/v1/user", strings.NewReader(bodys))
+	rec := httptest.NewRecorder()
+	req.Header.Set("Content-Type", "application/json")
+	g.ServeHTTP(rec, req)
+	assert.Equal(t, rec.Result().StatusCode, http.StatusOK)
+	t.Logf(rec.Body.String())
+}
+
+func TestTicket(t *testing.T) {
+	req := httptest.NewRequest(http.MethodGet, "/v1/ticket/info/1", nil)
 	rec := httptest.NewRecorder()
 	req.Header.Set("Content-Type", "application/json")
 	g.ServeHTTP(rec, req)
