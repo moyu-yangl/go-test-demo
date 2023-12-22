@@ -4,8 +4,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"go-test-demo/config/db"
 	"go-test-demo/internal/middleware"
+	"go-test-demo/internal/server/report"
 	"go-test-demo/internal/server/ticket"
-	server2 "go-test-demo/internal/server/user"
+	"go-test-demo/internal/server/user"
 	"log"
 )
 
@@ -20,7 +21,11 @@ func InitRouter(r *gin.Engine) *gin.Engine {
 	}
 	{
 		userRouter := apiRouter.Group("/user")
-		userRouter.POST("/user", logging(server2.GetUser))
+		userRouter.POST("/user", logging(user.GetUser))
+	}
+	{
+		reportRouter := apiRouter.Group("/report")
+		reportRouter.GET("/download", logging(report.Download))
 	}
 
 	return r
